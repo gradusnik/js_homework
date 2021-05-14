@@ -1,0 +1,13 @@
+.items-list {
+  margin: 0;
+  display: none;
+  /* list-style-type: none; */
+}
+
+.items-list-opened {
+  display: block;
+}
+
+.item {
+  cursor: pointer;
+}

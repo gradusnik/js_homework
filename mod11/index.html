@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - SWAPI JS M11</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./iltems-list.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+  <div class="content">
+
+    <div class="search">
+      <div>
+        <span class="menu-link">откр</span>
+        <h6>Поиск</h6>
+        <ul class="items-list">
+          <li class="item">персонажа</li>
+          <li class="item">корабля</li>
+          <li class="item">планеты</li>
+        </ul>
+      </div>
+      <div class="search_form"><label class="search-label">Поиск персонажа</label><input type="text" class="person_search" id="person_search_input">
+        <button id="search_request_btn" class="button">Найти</button></div>
+      <ul class="search_result">
+      </ul>
+    </div>
+
+    <div class="person_data">
+      <div><span id="k01">Имя:</span> <span id="v01" class="parameter-value"></span></div>
+      <div><span id="k02">Рост:</span>  <span id="v02" class="parameter-value"></span></div>
+      <div><span id="k03">Вес:</span>  <span id="v03" class="parameter-value"></span></div>
+      <div><span id="k04">Год рождения:</span>  <span id="v04" class="parameter-value"></span></div>
+      <div><span id="k05">В скольки фильмах появлялся:</span>  <span id="v05" class="parameter-value"></span></div>
+    </div>
+  </div>
+<!-- partial -->
+  <script type="module" src="./chooseItem.js"></script>
+  <script type="module" src="./script01.js"></script>
+</body>
+</html>
