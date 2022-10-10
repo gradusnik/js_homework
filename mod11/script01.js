@@ -1,45 +1,30 @@
 import {url} from './chooseItem.js';
 import {numOfItem} from './chooseItem.js';
-//let nextUrl;
 let searchButton = document.querySelector('#search_request_btn');
 let searchResult = document.querySelector('.search_result');
-//let searchCount;
+let searchCount;
 let elIdNum;
 let mapOfParameters = [];
 searchButton.addEventListener('click', searching);
 
 function searching() {
   mapOfParameters.length = 0;
-  //nextUrl = url;
   elIdNum = 0;
-  //searchCount = 0;
+  searchCount = 0;
   clearSearchResList();
+  request(url)
+}
+
+function request(url) {
   fetch(url)
-    .then(function(response){
-      return response.json();
+    .then(response => response.json())
+    .then(function(obj){
+      chooseObject(obj.results)
+      // console.log(obj)
+      // console.log(obj.next)
+      return obj.next ? request(obj.next) : (!searchCount ? alert('nothing was found') : console.log(searchCount + ' objects is found'))
     })
-    .then(function(response) {
-      chooseObject(response.results);
-      //console.log(response);
-      let numOfNextPages = Math.ceil(response.count / 10) - 1;
-      //console.log(numOfNextPages);
-      let nextURLs = [];
-      // nextURLs.length = numOfNextPages;
-      //console.log(nextURLs);
-      for (let i = 0; i < numOfNextPages; ++i) {
-        nextURLs.push(url + '?page=' + (2 + i));
-      }
-      //nextURLs.forEach(item => console.log(item));
-      for (let i = 0; i < nextURLs.length; ++i) {
-        fetch(nextURLs[i])
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(response) {
-            chooseObject(response.results);
-          })
-      }
-    })
+    .catch(err => console.log(err))
 }
 
 function chooseObject(arr) {
@@ -48,7 +33,8 @@ function chooseObject(arr) {
   let rez = arr.filter(item => substr.test(item.name));
   //console.log(rez);
   //console.log('rez.len' + rez.length);
-  //searchCount += rez.length;
+  searchCount += rez.length;
+  //console.log('elem num' + searchCount)
   rez.forEach(element => {
     let searchResultItem = document.createElement('li');
     searchResultItem.innerHTML = element.name;
@@ -95,4 +81,3 @@ function displayParameters(event) {
     document.querySelector('#' + paramsId).textContent = mapOfParameters[numOfObj][i];
   } 
 }
-
